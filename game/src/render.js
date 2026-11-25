@@ -233,6 +233,10 @@ function drawGrill(ctx, state) {
         text(ctx, 'DONE ✓', cx, cy + 32, 12, '#b8f0b0', 'bold');
       }
     } else {
+      // A dark pill behind the label so the middle grate line does not read
+      // as a strike through the word.
+      ctx.fillStyle = '#2c2c33';
+      roundRect(ctx, cx - 26, cy - 10, 52, 20, 6); ctx.fill();
       text(ctx, 'empty', cx, cy, 12, '#b9b3a8', 'normal');
     }
   });

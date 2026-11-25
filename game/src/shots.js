@@ -45,8 +45,11 @@ export function stageShot(name, world) {
   }
   if (name === 'rush') {
     // The last half-minute: the timer red and pulsing, the board full, a ticket
-    // about to run out of patience.
-    runUntil(world, 178, (s) => s.time >= 150 && s.tickets.some((t) => t.state === 'open' && t.patience / t.patienceMax < 0.5));
+    // about to run out of patience — and the chef clear of the chopping-board
+    // header, so nothing he carries covers a station label.
+    runUntil(world, 178, (s) => s.time >= 150
+      && s.tickets.some((t) => t.state === 'open' && t.patience / t.patienceMax < 0.5)
+      && (s.chef.x > 260 || !s.chef.carry));
     return { screen: 'playing' };
   }
   // Cover: a busy kitchen — several tickets open, a dish mid-assembly on the
